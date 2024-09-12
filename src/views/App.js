@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
-import "./App.css";
-
+import "./App.scss";
+import MyComponent from "./example/myComponent";
+import MyProfile from "./example/myAvatar";
 function App() {
   return (
     <div className="App">
@@ -15,9 +16,10 @@ function App() {
         >
           Learn React
         </a>
+        <MyComponent></MyComponent>
+        <MyProfile />
       </header>
     </div>
   );
 }
-
 export default App;
