@@ -7,26 +7,46 @@ class MyComponent extends React.Component {
   state: bản chất của nó là khi thay đổi dữ liệu, không cần reload lại page 
   */
   state = {
-    name: "Eric",
-    age: 18,
+    firstName: "",
+    lastName: ""
   };
-  handleOnChangeName = (event) => {
+
+
+  handleChangeFirstName = (event) => {
     this.setState({
-      name: event.target.value,
-    });
-  };
+      firstName: event.target.value,
+    })
+  }
+  handleChangeLastName = (event) => {
+    this.setState({
+      lastName: event.target.value,
+    })
+  }
+  handleSubmit = (event) => {
+    event.preventDefault()
+    console.log("check data state", this.state)
+  }
   render() {
     return (
       <>
-        <div className="first">
+        <form >
+          <label htmlFor="fname">First name:</label><br />
           <input
-            value={this.state.name}
             type="text"
-            onChange={(event) => this.handleOnChangeName(event)}
+            value={this.state.firstName}
+            onChange={(event) => this.handleChangeFirstName(event)}
+          /><br />
+          <label htmlFor="lname">Last name:</label><br />
+          <input
+            type="text"
+            value={this.state.lastName}
+            onChange={(event) => this.handleChangeLastName(event)}
+          /><br /><br />
+          <input type="submit"
+            value="Submit"
+            onClick={(event) => this.handleSubmit(event)}
           />
-          Hello my Component, My name is {this.state.name}
-        </div>{" "}
-        <div className="second">my age is {this.state.age}</div>
+        </form>
       </>
     );
   }
