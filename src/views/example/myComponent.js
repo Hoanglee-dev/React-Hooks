@@ -1,5 +1,5 @@
 import React from "react";
-
+import ChildComponent from "./ChildComponent";
 class MyComponent extends React.Component {
   /* 
   JSX: giúp js trả ra 1 đống html
@@ -8,7 +8,12 @@ class MyComponent extends React.Component {
   */
   state = {
     firstName: "",
-    lastName: ""
+    lastName: "",
+    arrJob: [
+      { id: "abcjob1", title: "dev", salary: " 500$" },
+      { id: "abcjob2", title: "tester", salary: " 400$" },
+      { id: "abcjob3", title: "Project", salary: " 300$" }
+    ]
   };
 
 
@@ -47,6 +52,12 @@ class MyComponent extends React.Component {
             onClick={(event) => this.handleSubmit(event)}
           />
         </form>
+        <ChildComponent
+          name={this.state.firstName}
+          age={"24"}
+          address={"DaNang"}
+          arrJob={this.state.arrJob}
+        />
       </>
     );
   }
