@@ -21,7 +21,6 @@ class AddComponent extends React.Component {
       alert("Missing required params")
       return;
     }
-    console.log("check data state", this.state)
     this.props.addNewJob({
       id: Math.floor(Math.random() * 100),
       title: this.state.title,
