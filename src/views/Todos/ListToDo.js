@@ -56,48 +56,52 @@ class ListToDo extends React.Component {
   render() {
     let { ListToDos, editTodo } = this.state
     let isEmtyObj = Object.keys(editTodo).length === 0;
+
     return (
-      <div className="list-todo-container">
-        <AddToDo
-          addNewToDo={this.addNewToDo}
-        />
-        <div className="list-todo-content">
-          {ListToDos && ListToDos.length > 0 &&
-            ListToDos.map((item, index) => {
-              return (
-                <div className="todo-child" key={item.id}>
-                  {isEmtyObj === true ?
-                    <>
-                      <span>{index + 1}-{item.title}</span>
-                    </>
-                    :
-                    <>
-                      {editTodo.id === item.id ?
-                        <span>
-                          {index + 1}-<input
-                            onChange={(event) => this.handelOnchangeToDo(event)}
-                            value={editTodo.title} />
-                        </span>
-                        :
+      <>
+        <p>Simple ToDo apps with React.js</p>
+        <div className="list-todo-container">
+          <AddToDo
+            addNewToDo={this.addNewToDo}
+          />
+          <div className="list-todo-content">
+            {ListToDos && ListToDos.length > 0 &&
+              ListToDos.map((item, index) => {
+                return (
+                  <div className="todo-child" key={item.id}>
+                    {isEmtyObj === true ?
+                      <>
                         <span>{index + 1}-{item.title}</span>
+                      </>
+                      :
+                      <>
+                        {editTodo.id === item.id ?
+                          <span>
+                            {index + 1}-<input
+                              onChange={(event) => this.handelOnchangeToDo(event)}
+                              value={editTodo.title} />
+                          </span>
+                          :
+                          <span>{index + 1}-{item.title}</span>
+                        }
+                      </>}
+                    <button
+                      onClick={() => this.handelEditTodo(item)}
+                    >
+                      {isEmtyObj === false && editTodo.id === item.id ?
+                        "Save" : "Edit"
                       }
-                    </>}
-                  <button
-                    onClick={() => this.handelEditTodo(item)}
-                  >
-                    {isEmtyObj === false && editTodo.id === item.id ?
-                      "Save" : "Edit"
-                    }
-                  </button>
-                  <button
-                    onClick={() => this.handleDeleteToDo(item)}
-                  >Delete</button>
-                </div>
-              )
-            })
-          }
+                    </button>
+                    <button
+                      onClick={() => this.handleDeleteToDo(item)}
+                    >Delete</button>
+                  </div>
+                )
+              })
+            }
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 }
