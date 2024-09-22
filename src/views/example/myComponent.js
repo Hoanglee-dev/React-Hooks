@@ -1,47 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import ChildComponent from "./ChildComponent";
 import AddComponent from "./AddComponent";
-class MyComponent extends React.Component {
-  /* 
-  JSX: giúp js trả ra 1 đống html
-  <></>: trường hợp muốn render 2 cái div mà không cần div cha bọc bên ngoài thì dùng <></> (shortcut của <React.Fragment></React.Fragment>)
-  state: bản chất của nó là khi thay đổi dữ liệu, không cần reload lại page 
-  */
-  state = {
-    arrJob: [
+
+const MyComponent = (props) => {
+  const [listUsers, setListUser] = useState(
+    [
       { id: "abcjob1", title: "dev", salary: " 500" },
       { id: "abcjob2", title: "tester", salary: " 400" },
       { id: "abcjob3", title: "Project", salary: " 300" }
     ]
-  };
-
-  addNewJob = (job) => {
-    this.setState({
-      arrJob: [...this.state.arrJob, job]
-    })
+  )
+  const addNewJob = (job) => {
+    setListUser([...listUsers, job])
   }
-
-  deleteAJob = (job) => {
-    let currentJobs = this.state.arrJob;
-    currentJobs = currentJobs.filter(item => item.id !== job.id)
-    this.setState({
-      arrJob: currentJobs
-    })
+  const deleteAJob = (job) => {
+    let listUsersJobs = listUsers;
+    listUsersJobs = listUsersJobs.filter(item => item.id !== job.id)
+    setListUser(listUsersJobs)
   }
-
-  render() {
-    return (
-      <>
-        <AddComponent
-          addNewJob={this.addNewJob}
-        />
-        <ChildComponent
-          arrJob={this.state.arrJob}
-          deleteAJob={this.deleteAJob}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <AddComponent
+        addNewJob={addNewJob}
+      />
+      <ChildComponent
+        arrJob={listUsers}
+        deleteAJob={deleteAJob}
+      />
+    </>
+  )
 }
-
 export default MyComponent;
